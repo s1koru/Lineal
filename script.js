@@ -86,7 +86,7 @@ function generateRandomData(n) {
 }
 
 // Генерируем 1000 точек
-globalData = generateRandomData(15);
+globalData = generateRandomData(467);
 
 // Функция получения выбранных фильтров
 function getSelectedFilters(selector) {

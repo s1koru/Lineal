@@ -112,7 +112,7 @@ function randomSalary() {
 }
 
 function generateRealisticData(n) {
-  const genders = ["Male", "Female"];
+  const genders = ["Мужской", "Женский"];
   const educations = ["Среднее", "Высшее", "Другое"];
   const parentals = ["HE", "No HE", "No info"];
   const years = [2021, 2022, 2023];
@@ -179,7 +179,7 @@ function updateChart() {
       groupPoints.forEach((d, j) => {
         d.x = zoneStart + (j + 0.5) * (zoneWidth / count);
         d.y = yScale(d.salary);
-        d.color = d.gender === "Male" ? maleColorScale(d.eduLevel) : femaleColorScale(d.eduLevel);
+        d.color = d.gender === "Мужской" ? maleColorScale(d.eduLevel) : femaleColorScale(d.eduLevel);
         pointsData.push(d);
       });
     });
@@ -203,7 +203,7 @@ function updateChart() {
       tooltip.style("opacity", 1)
         .html(`<div><strong>Год:</strong> ${d.year}</div>
                <div><strong>Зарплата:</strong> ${d.salary} тыс. руб.</div>
-               <div><strong>Образование:</strong> ${d.education} (ур. ${d.eduLevel})</div>
+               <div><strong>Образование:</strong> ${d.education} </div>
                <div><strong>Пол:</strong> ${d.gender}</div>`)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY - 10) + "px");

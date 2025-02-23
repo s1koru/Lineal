@@ -120,9 +120,13 @@ function generateRealisticData(n) {
   for (let i = 0; i < n; i++) {
     const edu = educations[Math.floor(Math.random() * educations.length)];
     let eduLevel;
-    if (edu === "Среднее") { eduLevel = 1; }
-    else if (edu === "Другое") { eduLevel = 2; }
-    else if (edu === "Высшее") { eduLevel = 3; }
+    if (edu === "Среднее") {
+      eduLevel = 1;
+    } else if (edu === "Другое") {
+      eduLevel = 2;
+    } else if (edu === "Высшее") {
+      eduLevel = 3;
+    }
     const year = years[Math.floor(Math.random() * years.length)];
     const salary = randomSalary();
     data.push({
@@ -200,11 +204,12 @@ function updateChart() {
 
   pointsGroup.selectAll(".data-point")
     .on("mouseover", (event, d) => {
+      const genderRus = d.gender === "Male" ? "Мужской" : "Женский";
       tooltip.style("opacity", 1)
         .html(`<div><strong>Год:</strong> ${d.year}</div>
                <div><strong>Зарплата:</strong> ${d.salary} тыс. руб.</div>
-               <div><strong>Образование:</strong> ${d.education} </div>
-               <div><strong>Пол:</strong> ${d.gender}</div>`)
+               <div><strong>Образование:</strong> ${d.education}</div>
+               <div><strong>Пол:</strong> ${genderRus}</div>`)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY - 10) + "px");
     })

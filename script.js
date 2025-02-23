@@ -112,7 +112,7 @@ function randomSalary() {
 }
 
 function generateRealisticData(n) {
-  const genders = ["Мужской", "Женский"];
+  const genders = ["Male", "Female"];
   const educations = ["Среднее", "Высшее", "Другое"];
   const parentals = ["HE", "No HE", "No info"];
   const years = [2021, 2022, 2023];
@@ -179,7 +179,7 @@ function updateChart() {
       groupPoints.forEach((d, j) => {
         d.x = zoneStart + (j + 0.5) * (zoneWidth / count);
         d.y = yScale(d.salary);
-        d.color = d.gender === "Мужской" ? maleColorScale(d.eduLevel) : femaleColorScale(d.eduLevel);
+        d.color = d.gender === "Male" ? maleColorScale(d.eduLevel) : femaleColorScale(d.eduLevel);
         pointsData.push(d);
       });
     });

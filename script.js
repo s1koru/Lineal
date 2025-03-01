@@ -33,7 +33,7 @@ const yAxis = d3.axisLeft(yScale).ticks(10);
 
 svg.append("g")
   .attr("class", "x-axis")
-  .attr("transform", `translate(0, ${height})`)
+  .attr("transform", `translate(0,${height})`)
   .call(xAxis);
 
 svg.append("g")
@@ -136,7 +136,7 @@ function generateRealisticData(n) {
       gender: genders[Math.floor(Math.random() * genders.length)],
       education: edu,
       eduLevel: eduLevel,
-      parental: parentals[Math.floor(Math.random() * parentals.length)]
+      parental: ["HE", "No HE", "No info"][Math.floor(Math.random() * 3)]
     });
   }
   return data;
@@ -176,12 +176,20 @@ function updateChart() {
     salaryGroups.sort((a, b) => +a[0] - +b[0]);
     const center = yearCenters[year];
     const zoneStart = center - zoneWidth / 2;
+    // Для каждой группы с одинаковой зарплатой
     salaryGroups.forEach(group => {
       const groupPoints = group[1];
+      // Сортируем точки по уровню образования
       groupPoints.sort((a, b) => a.eduLevel - b.eduLevel);
       const count = groupPoints.length;
+      // Вычисляем центр подзоны для точки с данной зп (оставляем ту же зону, что и в исходном коде)
+      const groupZoneStart = zoneStart;
+      const groupZoneWidth = zoneWidth;
+      // Новая логика: все точки располагаются на одной прямой, центр этой линии – центр подзоны
+      const groupCenter = groupZoneStart + groupZoneWidth / 2;
       groupPoints.forEach((d, j) => {
-        d.x = zoneStart + (j + 0.5) * (zoneWidth / count);
+        // Смещаем точки вокруг центра с небольшим шагом (4)
+        d.x = groupCenter + (j - (count - 1) / 2) * 4;
         d.y = yScale(d.salary);
         d.color = d.gender === "Male" ? maleColorScale(d.eduLevel) : femaleColorScale(d.eduLevel);
         pointsData.push(d);

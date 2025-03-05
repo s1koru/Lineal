@@ -85,24 +85,22 @@ const tooltip = d3.select("body")
   .attr("class", "tooltip")
   .style("opacity", 0);
 
-const maleColorScale = d3.scaleLinear()
-  .domain([1, 2, 3, 4, 5])
+  const maleColorScale = d3.scaleLinear()
+  .domain([1, 2, 3, 4])
   .range([
-    "#C4DAED",
-    "#8BBADF",
-    "#4B9CD3",
-    "#3379A6",
-    "#1F4B70"
+    "#C4DAED", 
+    "#8BBADF", 
+    "#4B9CD3", 
+    "#1F4B70" 
   ]);
 
 const femaleColorScale = d3.scaleLinear()
-  .domain([1, 2, 3, 4, 5])
+  .domain([1, 2, 3, 4])
   .range([
-    "#FDD6DF",
-    "#FBBECB",
+    "#FDD6DF", 
+    "#FBBECB", 
     "#F7A4B2",
-    "#D46E77",
-    "#A83232"
+    "#A83232"  
   ]);
 
 let globalData = [];

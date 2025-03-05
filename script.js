@@ -9,7 +9,6 @@ const xScale = d3.scaleLinear()
   .domain([0, 600])
   .range([0, 600]);
 
-// Фиксируем ось Y от 0 до 400 (тыс. руб.)
 const yScale = d3.scaleLinear()
   .domain([0, 250])
   .range([height, 0]);

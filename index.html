@@ -2,13 +2,14 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Линейный график </title>
+  <title>Линейный график</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
   <h2>График заработной платы (2021–2023)</h2>
   <div id="chart"></div>
+
   <div class="filters">
     <div>
       <strong>Пол:</strong>
@@ -17,25 +18,19 @@
     </div>
     <div>
       <strong>Образование:</strong>
-      <label><input type="checkbox" class="filter-education" value="1" checked> 9 класс</label>
-      <label><input type="checkbox" class="filter-education" value="2" checked> 11 класс</label>
-      <label><input type="checkbox" class="filter-education" value="3" checked> Среднее проф.</label>
-      <label><input type="checkbox" class="filter-education" value="4" checked> Высшее</label>
-      <label><input type="checkbox" class="filter-education" value="5" checked> Другое</label>
+      <label><input type="checkbox" class="filter-education" value="1" checked> Школа</label>
+      <label><input type="checkbox" class="filter-education" value="2" checked> Среднее проф.</label>
+      <label><input type="checkbox" class="filter-education" value="3" checked> Высшее</label>
+      <label><input type="checkbox" class="filter-education" value="4" checked> Степень</label>
     </div>
     <div>
       <strong>Образование родителей:</strong>
-      <label>
-        <input type="checkbox" class="filter-parental" value="1" checked> Высшее
-      </label>
-      <label>
-        <input type="checkbox" class="filter-parental" value="2" checked> Нет высшего
-      </label>
-      <label>
-        <input type="checkbox" class="filter-parental" value="3" checked> Нет информации
-      </label>
+      <label><input type="checkbox" class="filter-parental" value="1" checked> Высшее</label>
+      <label><input type="checkbox" class="filter-parental" value="2" checked> Нет высшего</label>
+      <label><input type="checkbox" class="filter-parental" value="3" checked> Нет информации</label>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

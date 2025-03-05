@@ -9,6 +9,7 @@ const xScale = d3.scaleLinear()
   .domain([0, 600])
   .range([0, 600]);
 
+// Фиксируем ось Y от 0 до 400 (тыс. руб.)
 const yScale = d3.scaleLinear()
   .domain([0, 250])
   .range([height, 0]);
@@ -109,9 +110,7 @@ let globalData = [];
 
 function fetchAllData() {
   d3.json("data.json").then(data => {
-    globalData = data.map(d => {
-      return d;
-    });
+    globalData = data;
     updateChart();
   })
   .catch(error => console.error("Ошибка загрузки data.json:", error));
@@ -125,10 +124,10 @@ function getSelectedFilters(selector) {
 
 function educationLabel(code) {
   switch(code) {
-    case "1": return "9 класс";
-    case "2": return "11 класс";
-    case "3": return "Среднее проф.";
-    case "4": return "Высшее";
+    case "1": return "9/11 класс";
+    case "2": return "Среднее проф.";
+    case "3": return "Высшее";
+    case "4": return "Степень";
     case "5": return "Другое";
     default: return code;
   }
@@ -184,9 +183,12 @@ function updateChart() {
       groupPoints.forEach((d, j) => {
         d.x = groupCenter + (j - (count - 1) / 2) * 4.05;
         d.y = yScale(Math.round(d.salary / 1000));
+
+        // «Прямая» логика: если "Male" – мужская шкала, если "Female" – женская.
         d.color = d.gender === "Male"
           ? maleColorScale(+d.education)
           : femaleColorScale(+d.education);
+
         pointsData.push(d);
       });
     });
@@ -209,12 +211,15 @@ function updateChart() {
   pointsGroup.selectAll(".data-point")
     .on("mouseover", (event, d) => {
       const genderRus = d.gender === "Male" ? "Мужской" : "Женский";
+
       tooltip.style("opacity", 1)
-        .html(`<div><strong>Год:</strong> ${d.year}</div>
-               <div><strong>Зарплата:</strong> ${Math.round(d.salary / 1000)} тыс. руб.</div>
-               <div><strong>Образование:</strong> ${educationLabel(d.education)}</div>
-               <div><strong>Образование родителей:</strong> ${parentalLabel(d.parental)}</div>
-               <div><strong>Пол:</strong> ${genderRus}</div>`)
+        .html(`
+          <div><strong>Год:</strong> ${d.year}</div>
+          <div><strong>Зарплата:</strong> ${Math.round(d.salary / 1000)} тыс. руб.</div>
+          <div><strong>Образование:</strong> ${educationLabel(d.education)}</div>
+          <div><strong>Образование родителей:</strong> ${parentalLabel(d.parental)}</div>
+          <div><strong>Пол:</strong> ${genderRus}</div>
+        `)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY - 10) + "px");
     })
